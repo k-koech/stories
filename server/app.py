@@ -372,3 +372,5 @@ def add_review():
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
+# To run
+# gunicorn app:app
