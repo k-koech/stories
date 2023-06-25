@@ -10,6 +10,7 @@ Flask-Bcrypt
 Flask-Migrate
 Flask-RESTful
 flask-sqlalchemy
+flask_cors
 greenlet==2.0.2
 gunicorn==20.1.0
 importlib-metadata==6.7.0
