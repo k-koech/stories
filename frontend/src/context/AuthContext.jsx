@@ -113,130 +113,40 @@ export const AuthProvider = ({ children }) =>
     };
 
 
-
-  //   // RESET PASSWORD USER
-  //   const sendPassword = (email) => {
-  //     toast.loading("Loading!")
-
-  //     fetch(`/users/sendpassword`, {
-  //     method: "POST",
-  //     headers: {
-  //         "Content-Type": "application/json"
-  //       },
-  //     body: JSON.stringify({email})
-  //     })
-  //     .then((response)=> response.json() )
-  //     .then((response)=>{
-  //       console.log("pppop ", response)
-
-  //          if(response.success) 
-  //           {
-  //             toast.dismiss();
-  //             navigate("/login");
-  //             toast.success(response.success)
-  //           }
-  //           else if(response.email_error) 
-  //           {
-  //             toast.dismiss();
-  //             toast.error(response.email_error)
-  //           }
-  //           else if(response.error) 
-  //           {
-  //             toast.dismiss();
-  //             toast.error(response.error)
-  //           }
-  //           else{
-  //              toast.dismiss();
-  //              toast.error("Something went wrong!!")
-  //           }
-  //       })
-  //     .catch(()=>
-  //       {
-  //         toast.dismiss();
-  //         toast.error("Something went wrong!!")
-  //       })
-  //   }
-
-
-  //   // UPDATE PASSWORD from Profile section
-  //   const updatePassword = (oldpassword, newpassword) => {
+    // UPDATE PASSWORD 
+    const updatePassword = (email,username, password) => {
   
-  //     fetch(`/users/updatepassword`, {
-  //     method: "PATCH",
-  //     headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${authTokens.access}`
-  //       },
-  //     body: JSON.stringify({oldpassword, newpassword})
-  //     })
-  //     .then((response)=> response.json() )
-  //     .then((response)=>{
-  //          if(response.success) 
-  //           {              
-  //             oast.success(response.success + " Login again to access your account"), 1000);
-  //             logout()   
-  //           }
-  //           else if(response.email_error) 
-  //           {
-  //             toast.error(response.email_error)
-  //           }
-  //           else if(response.password_error) 
-  //           {
-  //             toast.error(response.password_error)
-  //           }
-  //           else if(response.detail)
-  //           {
-  //             toast.warning("Session expired!"), 1000)           
-  //             logout()
-  //           }
-  //           else{
-  //              toast.error("Something went wrong!!")
-  //           }
-  //       })
-  //     .catch(()=>
-  //       {
-  //         toast.error("Something went wrong!!")
-  //       })
-  //   }
+      fetch(`/api/users/updatepassword`, {
+      method: "PATCH",
+      headers: {
+          "Content-Type": "application/json"
+        },
+      body: JSON.stringify({email,username, password})
+      })
+      .then((response)=> response.json() )
+      .then((response)=>{
+           if(response.success) 
+            {   
+              Swal.fire({'icon':'success','timer':3000,'text':'New password saved',"confirmButtonColor": '#088F8F',
+              'title':"Success", })   
+              navigate("/login")
+                 
+            }
+            else if(response.error) 
+            {
+              Swal.fire({'icon':'error','timer':3000,'text':response.error,"confirmButtonColor": '#088F8F',
+              'title':"Success", })
+            }
+            else{
+               something_went_wrong()
+            }
+        })
+      .catch(()=>
+        {
+          something_went_wrong()
+        })
+    }
     
-
-  //    // UPDATE USERNAME from Profile section
-  //    const updateUsername = (username) => {
-  
-  //     fetch(`/user/updateusername`, {
-  //     method: "PATCH",
-  //     headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${authTokens.access}`
-  //       },
-  //     body: JSON.stringify({username})
-  //     })
-  //     .then((response)=> response.json() )
-  //     .then((response)=>{
-  //          if(response.success) 
-  //           {        
-  //             setOnDataChange(!onDataChange)      
-  //             oast.success(response.success), 1000);
-  //           }
-  //           else if(response.error) 
-  //           {
-  //             toast.error(response.error)
-  //           }
-  //           else if(response.detail)
-  //           {
-  //             toast.warning("Session expired!"), 1000)           
-  //             logout()
-  //           }
-  //           else{
-  //              toast.error("Something went wrong!!")
-  //           }
-  //       })
-  //     .catch(()=>
-  //       {
-  //         toast.error("Something went wrong!!")
-  //       })
-  //   }
-
 
     // LOGOUT USER
     const logout = () => 
@@ -250,7 +160,7 @@ export const AuthProvider = ({ children }) =>
           {
             setCurrentUser(null)
             setOnDataChange(!onDataChange);
-            navigate("/")
+            navigate("/login")
             Swal.fire({'icon':'success','timer':3000,'text':'Logout Successfully!',"confirmButtonColor": '#088F8F',
             'title':"Success", }) 
             
@@ -302,6 +212,7 @@ export const AuthProvider = ({ children }) =>
     {
         register,
         login,
+        updatePassword,
         current_user,
         logout
     };  

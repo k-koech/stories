@@ -6,11 +6,12 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
 import Favourites from './pages/Favourites'
-import Stories from './pages/Stories'
 import Story from './pages/Story'
 import { AuthProvider } from './context/AuthContext'
 import { BooksProvider } from './context/BooksContext'
 import AddBook from './pages/AddBook'
+import { PrivateRoute } from './components/PrivateRoute'
+import Updatepassword from './pages/Updatepassword'
 
 function App() {
 
@@ -20,16 +21,15 @@ function App() {
       <BooksProvider>
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home/>} />
+        <Route index element={<PrivateRoute><Home/></PrivateRoute>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/addbook" element={<AddBook/>} />
+        <Route path="/profile" element={<PrivateRoute><Profile/></PrivateRoute>} />
+        <Route path="/updatepassword" element={<Updatepassword/>} />
 
-        <Route path="/stories" element={<Stories/>} />
-        <Route path="/story/:id" element={<Story/>} />
-
-        <Route path="/favourites" element={<Favourites/>} />
+        <Route path="/addbook" element={<PrivateRoute><AddBook/></PrivateRoute>} />
+        <Route path="/story/:id" element={<PrivateRoute><Story/></PrivateRoute>} />
+        <Route path="/favourites" element={<PrivateRoute><Favourites/></PrivateRoute>} />
 
       </Route>
       </Routes>

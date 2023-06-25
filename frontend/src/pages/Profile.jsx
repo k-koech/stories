@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { FaLongArrowAltRight } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 export default function Profile() 
 {
@@ -39,12 +40,12 @@ export default function Profile()
                                 {current_user && current_user.books.map((book)=>(
                                 <div key={book.id} className="grid grid-cols-2 w-full border-t border-gray-100 text-gray-600 py-4 pl-6 pr-3 w-full block hover:bg-gray-100 transition duration-150">
                                     <div>
-                                        <img src={book.book_image} alt="x" className="rounded-full h-6 shadow-md inline-block mr-2" />
+                                        <img src={book.book_image} alt="" className="h-10 w-auro shadow-md inline-block mr-2" />
                                         {book && book.title}
                                     </div>
-                                    <div className="text-gray-500 text-xs">
+                                    <Link to={`/story/${book.id}`} className="text-gray-500 text-xs">
                                         <FaLongArrowAltRight />
-                                    </div>
+                                    </Link >
                                 </div>  
                                  ))} 
                                 

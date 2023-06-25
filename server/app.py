@@ -52,7 +52,6 @@ class Signup(Resource):
 class CheckSession(Resource):
     
     def get(self):
-
         if session.get('user_id'):
             user = User.query.filter(User.id == session['user_id']).first()
             
@@ -98,14 +97,12 @@ class CheckSession(Resource):
 class Login(Resource):
     
     def post(self):
-
         request_json = request.get_json()
 
         email_username = request_json.get('email_username')
         password = request_json.get('password')
 
-        user = User.query.filter(User.username == email_username or User.email==email_username).first()
-
+        user = User.query.filter((User.username==email_username) or (User.email==email_username)).first()
         if user:
             if user.authenticate(password):
 
@@ -113,7 +110,7 @@ class Login(Resource):
                 return user.to_dict(), 200
                 # return {'user': '401 Unauthorized'}, 200
 
-        return {'error': 'Wrong Username/Email or Password'}, 401
+        return {'error': 'Wrong Email or Password'}, 401
 
 class Logout(Resource):
     def delete(self):
@@ -130,6 +127,21 @@ api.add_resource(CheckSession, '/api/current_user', endpoint='check_session')
 api.add_resource(Login, '/api/login', endpoint='login')
 api.add_resource(Logout, '/api/logout', endpoint='logout')
 
+
+@app.route('/api/users/updatepassword', methods=['PATCH'])
+def updatepassword():
+    data = request.get_json()
+
+    username =  data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+    user = User.query.filter_by(username=username, email=email).first()
+    if not user:
+        return jsonify({'error': 'Wrong username/email'})
+    
+    user.password_hash = password
+    db.session.commit()
+    return jsonify({'success': 'Password update success'})
 
 
 @app.route('/api/users', methods=['GET'])
@@ -296,8 +308,7 @@ def save_book():
         return jsonify({'success': 'Added to favourites'})
     else:
         book = Saved.query.filter_by(user_id=session['user_id'],book_id=book_id).first()
-        # if not book:
-        #     return jsonify({'error': 'Book not found'})
+     
         print("ppp ",book)
         db.session.delete(book)
         db.session.commit()
