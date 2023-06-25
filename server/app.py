@@ -1,15 +1,30 @@
 #!/usr/bin/env python3
+import os
 import json
-from flask import Flask, request, jsonify,request, session
+from flask import Flask, request, jsonify,request, session, render_template
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
-
+from flask_cors import CORS
 from config import app, db, api
 from models import User,Book, BookReview,Saved
+CORS(app)
+# app.static_url_path = ''
+# app.static_folder = 'frontend/dist'
+# app.template_folder = 'frontend/dist'
+# app = Flask(__name__, static_url_path='',
+#                   static_folder='frontend/dist',
+#                   template_folder='frontend/dist')
 
 headers = {
     'Content-Type': 'application/json'
 }
+
+
+
+@app.route("/")
+def index():
+    return render_template('index.html')
+
 
 class Signup(Resource):
     
