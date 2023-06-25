@@ -69,7 +69,9 @@ class CheckSession(Resource):
                 for book in books:
                     book_list.append({
                         'id': book.id,
-                        'title': book.title
+                        'title': book.title,
+                        'content': book.content,
+                        'book_image': book.book_image
                     })
                 
                 user_data['books'] = book_list
