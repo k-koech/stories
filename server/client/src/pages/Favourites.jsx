@@ -40,16 +40,19 @@ export default function Favourites()
             <img src={book && book.books.book_image } className='h-auto w-full' alt="" />
           </div>
           <div className="p-3 mb-4 lg:mb-6 not-format">
-               <h6>{book && book.books.title}</h6>
+               <h6 className='text-xl font-semibold'>{book && book.books.title}</h6>
                <div className="inline-flex items-center my-4" >
-                  <img className="mr-4 w-8 h-8 rounded-full" src="/defaultuser.png" alt="Jese Leos" />
+                 {book && book.user && book.user.image_url?
+                           <img src={book.user.image_url} alt="profile loading" className="rounded-full mx-auto   w-10 h-10 mr-3 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
+                         :
+                         <img src="/defaultuser.png" alt="profile loading" className="rounded-full mx-auto  w-10 h-10 mr-3 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
+
+                      }
                   <div>
                       <a href="#" rel="author" className="text-xl text-gray-900 dark:text-white">
                         {book && book.user && book.user.username}
                         </a>
-                      <p className="text-base font-light text-gray-500 dark:text-gray-400">
-                        {book && book.user && book.user.bio}
-                      </p>
+                     
                   </div>
                 </div>
                <div className='flex items-center justify-between'>

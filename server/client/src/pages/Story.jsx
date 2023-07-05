@@ -37,7 +37,14 @@ export default function Story()
               <address className="flex items-center mb-6 not-italic">
                   <div className="w-full inline-flex items-center justify-between mr-3 text-sm text-gray-900 dark:text-white">
                       <div className="inline-flex items-center " >
-                        <img className="mr-4 w-10 h-10 rounded-full" src="/defaultuser.png" alt="Jese Leos" />
+                      <div>
+                      {book && book.user && book.user.image_url?
+                           <img src={book.user.image_url} alt="profile loading" className="rounded-full mx-auto   w-20 h-20 mr-3 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
+                         :
+                         <img src="/defaultuser.png" alt="profile loading" className="rounded-full mx-auto  w-20 h-20 mr-3 shadow-md border-4 border-white transition duration-200 transform hover:scale-110" />
+
+                      }
+                      </div>
                         <div>
                             <a href="#" rel="author" className="text-xl font-bold text-gray-900 dark:text-white">
                               {book && book.user && book.user.username}

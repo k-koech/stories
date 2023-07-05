@@ -317,7 +317,7 @@ def save_book():
         print("ppp ",book)
         db.session.delete(book)
         db.session.commit()
-        return jsonify({'success': 'Removed from saved'})
+        return jsonify({'success': 'Removed from favourites'})
 
 # REVIEWS
 @app.route('/api/reviews/<int:book_id>', methods=['GET'])

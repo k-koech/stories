@@ -7,7 +7,7 @@ export default function Layout() {
   return (
     <div>
         <Navbar />
-        <div className='min-h-[75vh]'>
+        <div className='bg-white border p-3 min-h-[75vh]'>
           <Outlet/>
         </div>
         <Footer/>

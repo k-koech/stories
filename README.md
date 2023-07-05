@@ -16,13 +16,17 @@
     - Also the flask has react intergrated so can just use the flask server only.
     - And you are all done.
 
+    - You can test using these credentials
+        - email: triplek901@gmail.com/ username: triplek
+        - password: kkkkk
+
 
 ## BDD
     As a user should;
     - Register, login and update password.
     - Add Stories, Update, delete and view.
     - Add Stories to favourites and also remove them from favourites.
-    - View profile page and view your stories in the profile page.
+    - View profile page and view your storybooks in the profile page.
     - Add a review about the book.   
     
 ## Live link
