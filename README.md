@@ -3,6 +3,7 @@
 #### **By Kelvin Kipchumba**
 ## Project Description
     Its a App where you can get to read stories online like wattpad.
+    Flask REST and React App
 ## Setup/Installation Requirements
     - Download a file in the code section to the desired folder
     - Extract the files
