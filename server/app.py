@@ -7,13 +7,8 @@ from sqlalchemy.exc import IntegrityError
 from flask_cors import CORS
 from config import app, db, api
 from models import User,Book, BookReview,Saved
-CORS(app)
-# app.static_url_path = ''
-# app.static_folder = 'frontend/dist'
-# app.template_folder = 'frontend/dist'
-# app = Flask(__name__, static_url_path='',
-#                   static_folder='frontend/dist',
-#                   template_folder='frontend/dist')
+# CORS(app)
+
 
 headers = {
     'Content-Type': 'application/json'
@@ -91,33 +86,24 @@ class CheckSession(Resource):
                 user_data['books'] = book_list
                 print("PPPPO ", user_data)
                 return jsonify(user_data)
-            # response = []
-            # user_data = {
-            #     'id': user.id,
-            #     'name': user.username,
-            #     'bio': user.bio,
-            #     'image_url': user.image_url,
-            #     'books': [{
-            #         'id': user.books.id,
-            #         'title': user.books.title,
-            #         'content': user.books.content,
-            #         'book_image': user.books.book_image,
-            #     }]
-            # }
-              
-            # return user.to_dict()
 
         return {'error': '401 Unauthorized'}, 401
 
+def get_user_by_email_or_username(email_or_username):
+    user = User.query.filter_by(username=email_or_username).first()
+    if not user:
+            user = User.query.filter_by(email=email_or_username).first()
+    return user
+
+
 class Login(Resource):
-    
     def post(self):
         request_json = request.get_json()
 
         email_username = request_json.get('email_username')
         password = request_json.get('password')
 
-        user = User.query.filter((User.username==email_username) or (User.email==email_username)).first()
+        user = get_user_by_email_or_username(email_username)
         if user:
             if user.authenticate(password):
 
