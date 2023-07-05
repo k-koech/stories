@@ -11,7 +11,8 @@
     - Then run "npm install" to install react packages.
     - Run "npm start" to start react server, http://127.0.0.1:3001/.
     - The open server folder and run "bundle install".
-    - Run "python3 run" to open the backend server, http://127.0.0.1:5555/.
+    - Run "python3 run" or "flask run" to open the backend server, http://127.0.0.1:5555/ or http://127.0.0.1:5000/  respectively
+    - Also the flask has react intergrated so can just use the flask server only.
     - And you are all done.
 
 
@@ -24,8 +25,7 @@
     - Add a review about the book.   
     
 ## Live link
-Deployed Frontend can be accessed here []()   
-Deployed Backend can be accessed here []()
+Deployed Link can be accessed here []()
 
 ## Known Bugs
     - Application works perfectly well, no bugs.
